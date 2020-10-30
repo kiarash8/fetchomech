@@ -30,7 +30,7 @@ const Request = async (
     fetch(url, requestOptions)
       .then(response => response.text())
       .then(result => {
-        const res = JSON.parse(result)
+        const res = JSON.parse(result.toString())
         resolve({ status: true, response: res })
       })
       .catch(error => reject({ status: false, error: error }))
