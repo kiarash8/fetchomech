@@ -1,6 +1,6 @@
 {
   "name": "@kiarash8/fetchomech",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "HTTP Request",
   "main": "build/index.js",
   "module": "build/index.es.js",
