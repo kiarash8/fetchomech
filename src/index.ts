@@ -27,13 +27,12 @@ const Request = async (
     // //set request body
     if (body) requestOptions['body'] = body
 
-    // //set request timeout
-    // if (timeout) requestOptions['timeout'] = timeout
-    // console.log(timeout)
-
     fetch(url, requestOptions)
       .then(response => response.text())
-      .then(result => resolve({ status: true, response: JSON.parse(result) }))
+      .then(result => {
+        const res = JSON.parse(result)
+        resolve({ status: true, response: res })
+      })
       .catch(error => reject({ status: false, error: error }))
   })
 }

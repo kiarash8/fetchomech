@@ -1767,12 +1767,12 @@ headers, pathVariables, queryParams, body) { return __awaiter(void 0, void 0, vo
                 // //set request body
                 if (body)
                     requestOptions['body'] = body;
-                // //set request timeout
-                // if (timeout) requestOptions['timeout'] = timeout
-                // console.log(timeout)
                 nodePonyfill(url, requestOptions)
                     .then(function (response) { return response.text(); })
-                    .then(function (result) { return resolve({ status: true, response: JSON.parse(result) }); })
+                    .then(function (result) {
+                    var res = JSON.parse(result);
+                    resolve({ status: true, response: res });
+                })
                     .catch(function (error) { return reject({ status: false, error: error }); });
             })];
     });
