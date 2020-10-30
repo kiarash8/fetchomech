@@ -10,9 +10,8 @@ export interface KeyValue {
 }
 export interface RequestParameter {
     url: string;
-    headers?: KeyValue[];
+    headers?: object;
     pathVariables?: KeyValue;
     queryParams?: KeyValue;
     body?: any;
-    timeout?: number;
 }

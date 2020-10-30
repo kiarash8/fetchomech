@@ -1,5 +1,5 @@
 {
-  "name": "fetchomech",
+  "name": "@kiarash8/fetchomech",
   "version": "1.0.0",
   "description": "HTTP Request",
   "main": "build/index.js",
@@ -50,6 +50,6 @@
     ]
   },
   "dependencies": {
-    "xmlhttprequest-ts": "^1.0.1"
+    "cross-fetch": "^3.0.6"
   }
 }

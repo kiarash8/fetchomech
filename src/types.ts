@@ -12,9 +12,8 @@ export interface KeyValue {
 
 export interface RequestParameter {
   url: string // "/route/:pathId/../:pathId"
-  headers?: KeyValue[]
+  headers?: object
   pathVariables?: KeyValue
   queryParams?: KeyValue
   body?: any
-  timeout?: number
 }

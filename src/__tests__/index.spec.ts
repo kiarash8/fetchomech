@@ -3,14 +3,13 @@ import { Delete, Get, Patch, Post, Put } from '../index'
 test('Get Request', () => {
   return Get({
     url: 'https://postman-echo.com/response-headers',
-    headers: [{ 'Content-Type': 'application/json' }],
+    headers: { 'Content-Type': 'application/json' },
     pathVariables: {},
     queryParams: {
       foo1: 'bar1',
       foo2: 'bar2'
     },
-    body: null,
-    timeout: 30000
+    body: null
   }).then(data => {
     expect(JSON.stringify(data)).toBe(
       '{"status":true,"response":{"foo1":"bar1","foo2":"bar2"}}'
@@ -21,7 +20,7 @@ test('Get Request', () => {
 test('Post Request', () => {
   return Post({
     url: 'https://postman-echo.com/post',
-    headers: [{ 'Content-Type': 'application/json' }],
+    headers: { 'Content-Type': 'application/json' },
     pathVariables: {},
     queryParams: {
       foo1: 'bar1',
@@ -30,8 +29,7 @@ test('Post Request', () => {
     body: JSON.stringify({
       foo1: 'bar1',
       foo2: 'bar2'
-    }),
-    timeout: 30000
+    })
   }).then(data => {
     expect(JSON.stringify(data.response.args)).toBe(
       '{"foo1":"bar1","foo2":"bar2"}'
@@ -42,10 +40,31 @@ test('Post Request', () => {
   })
 })
 
+test('Post Request', () => {
+  return Post({
+    url: 'https://postman-echo.com/post',
+    headers: { 'Content-Type': 'application/json' },
+    pathVariables: {},
+    queryParams: {
+      foo1: 'b1',
+      foo2: 'b2'
+    },
+    body: JSON.stringify({
+      foo1: 'bar1',
+      foo2: 'bar2'
+    })
+  }).then(data => {
+    expect(JSON.stringify(data.response.args)).toBe('{"foo1":"b1","foo2":"b2"}')
+    expect(JSON.stringify(data.response.data)).toBe(
+      '{"foo1":"bar1","foo2":"bar2"}'
+    )
+  })
+})
+
 test('Put Request', () => {
   return Put({
     url: 'https://postman-echo.com/put',
-    headers: [{ 'Content-Type': 'application/json' }],
+    headers: { 'Content-Type': 'application/json' },
     pathVariables: {},
     queryParams: {
       foo1: 'bar1',
@@ -54,8 +73,7 @@ test('Put Request', () => {
     body: JSON.stringify({
       foo1: 'bar1',
       foo2: 'bar2'
-    }),
-    timeout: 30000
+    })
   }).then(data => {
     expect(JSON.stringify(data.response.args)).toBe(
       '{"foo1":"bar1","foo2":"bar2"}'
@@ -69,7 +87,7 @@ test('Put Request', () => {
 test('Patch Request', () => {
   return Patch({
     url: 'https://postman-echo.com/patch',
-    headers: [{ 'Content-Type': 'application/json' }],
+    headers: { 'Content-Type': 'application/json' },
     pathVariables: {},
     queryParams: {
       foo1: 'bar1',
@@ -78,8 +96,7 @@ test('Patch Request', () => {
     body: JSON.stringify({
       foo1: 'bar1',
       foo2: 'bar2'
-    }),
-    timeout: 30000
+    })
   }).then(data => {
     expect(JSON.stringify(data.response.args)).toBe(
       '{"foo1":"bar1","foo2":"bar2"}'
@@ -93,7 +110,7 @@ test('Patch Request', () => {
 test('Delete Request', () => {
   return Delete({
     url: 'https://postman-echo.com/delete',
-    headers: [{ 'Content-Type': 'application/json' }],
+    headers: { 'Content-Type': 'application/json' },
     pathVariables: {},
     queryParams: {
       foo1: 'bar1',
@@ -102,8 +119,7 @@ test('Delete Request', () => {
     body: JSON.stringify({
       foo1: 'bar1',
       foo2: 'bar2'
-    }),
-    timeout: 30000
+    })
   }).then(data => {
     expect(JSON.stringify(data.response.args)).toBe(
       '{"foo1":"bar1","foo2":"bar2"}'
