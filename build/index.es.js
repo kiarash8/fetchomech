@@ -1745,7 +1745,7 @@ var nodePonyfill_4 = nodePonyfill.Response;
 
 var Request$1 = function (method, url, // "/route/:pathId/../:pathId"
 headers, pathVariables, queryParams, body) { return __awaiter(void 0, void 0, void 0, function () {
-    var requestOptions, res, err_1;
+    var requestOptions, res, result, err_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
@@ -1771,7 +1771,9 @@ headers, pathVariables, queryParams, body) { return __awaiter(void 0, void 0, vo
                     throw new Error('Bad response from server');
                 }
                 return [4 /*yield*/, res.json()];
-            case 2: return [2 /*return*/, _a.sent()];
+            case 2:
+                result = _a.sent();
+                return [2 /*return*/, result];
             case 3:
                 err_1 = _a.sent();
                 throw new Error(err_1);

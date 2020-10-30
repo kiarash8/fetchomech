@@ -9,7 +9,7 @@ const Request = async (
   pathVariables: KeyValue,
   queryParams: KeyValue,
   body: any
-): Promise<any> => {
+) => {
   try {
     // setting the path variables
     url = pathVariables ? SetPathVariables(url, pathVariables) : url
@@ -32,7 +32,8 @@ const Request = async (
     if (res.status >= 400) {
       throw new Error('Bad response from server')
     }
-    return await res.json()
+    const result = await res.json()
+    return result
   } catch (err) {
     throw new Error(err)
   }
