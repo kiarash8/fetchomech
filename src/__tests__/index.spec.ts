@@ -11,32 +11,7 @@ test('Get Request', () => {
     },
     body: null
   }).then(data => {
-    expect(JSON.stringify(data)).toBe(
-      '{"status":true,"response":{"foo1":"bar1","foo2":"bar2"}}'
-    )
-  })
-})
-
-test('Post Request', () => {
-  return Post({
-    url: 'https://postman-echo.com/post',
-    headers: { 'Content-Type': 'application/json' },
-    pathVariables: {},
-    queryParams: {
-      foo1: 'bar1',
-      foo2: 'bar2'
-    },
-    body: JSON.stringify({
-      foo1: 'bar1',
-      foo2: 'bar2'
-    })
-  }).then(data => {
-    expect(JSON.stringify(data.response.args)).toBe(
-      '{"foo1":"bar1","foo2":"bar2"}'
-    )
-    expect(JSON.stringify(data.response.data)).toBe(
-      '{"foo1":"bar1","foo2":"bar2"}'
-    )
+    expect(JSON.stringify(data)).toBe('{"foo1":"bar1","foo2":"bar2"}')
   })
 })
 
@@ -54,10 +29,8 @@ test('Post Request', () => {
       foo2: 'bar2'
     })
   }).then(data => {
-    expect(JSON.stringify(data.response.args)).toBe('{"foo1":"b1","foo2":"b2"}')
-    expect(JSON.stringify(data.response.data)).toBe(
-      '{"foo1":"bar1","foo2":"bar2"}'
-    )
+    expect(JSON.stringify(data.args)).toBe('{"foo1":"b1","foo2":"b2"}')
+    expect(JSON.stringify(data.data)).toBe('{"foo1":"bar1","foo2":"bar2"}')
   })
 })
 
@@ -75,12 +48,8 @@ test('Put Request', () => {
       foo2: 'bar2'
     })
   }).then(data => {
-    expect(JSON.stringify(data.response.args)).toBe(
-      '{"foo1":"bar1","foo2":"bar2"}'
-    )
-    expect(JSON.stringify(data.response.data)).toBe(
-      '{"foo1":"bar1","foo2":"bar2"}'
-    )
+    expect(JSON.stringify(data.args)).toBe('{"foo1":"bar1","foo2":"bar2"}')
+    expect(JSON.stringify(data.data)).toBe('{"foo1":"bar1","foo2":"bar2"}')
   })
 })
 
@@ -98,12 +67,8 @@ test('Patch Request', () => {
       foo2: 'bar2'
     })
   }).then(data => {
-    expect(JSON.stringify(data.response.args)).toBe(
-      '{"foo1":"bar1","foo2":"bar2"}'
-    )
-    expect(JSON.stringify(data.response.data)).toBe(
-      '{"foo1":"bar1","foo2":"bar2"}'
-    )
+    expect(JSON.stringify(data.args)).toBe('{"foo1":"bar1","foo2":"bar2"}')
+    expect(JSON.stringify(data.data)).toBe('{"foo1":"bar1","foo2":"bar2"}')
   })
 })
 
@@ -121,11 +86,7 @@ test('Delete Request', () => {
       foo2: 'bar2'
     })
   }).then(data => {
-    expect(JSON.stringify(data.response.args)).toBe(
-      '{"foo1":"bar1","foo2":"bar2"}'
-    )
-    expect(JSON.stringify(data.response.data)).toBe(
-      '{"foo1":"bar1","foo2":"bar2"}'
-    )
+    expect(JSON.stringify(data.args)).toBe('{"foo1":"bar1","foo2":"bar2"}')
+    expect(JSON.stringify(data.data)).toBe('{"foo1":"bar1","foo2":"bar2"}')
   })
 })

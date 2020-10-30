@@ -1745,14 +1745,17 @@ var nodePonyfill_4 = nodePonyfill.Response;
 
 var Request$1 = function (method, url, // "/route/:pathId/../:pathId"
 headers, pathVariables, queryParams, body) { return __awaiter(void 0, void 0, void 0, function () {
+    var requestOptions, res, err_1;
     return __generator(this, function (_a) {
-        // setting the path variables
-        url = pathVariables ? SetPathVariables(url, pathVariables) : url;
-        // setting the query params
-        if (queryParams)
-            url = url + "?" + SetQueryParams(queryParams);
-        return [2 /*return*/, new Promise(function (resolve, reject) {
-                var requestOptions = {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 3, , 4]);
+                // setting the path variables
+                url = pathVariables ? SetPathVariables(url, pathVariables) : url;
+                // setting the query params
+                if (queryParams)
+                    url = url + "?" + SetQueryParams(queryParams);
+                requestOptions = {
                     method: method
                 };
                 // //set request headers
@@ -1761,12 +1764,19 @@ headers, pathVariables, queryParams, body) { return __awaiter(void 0, void 0, vo
                 // //set request body
                 if (body)
                     requestOptions['body'] = body;
-                nodePonyfill(url, requestOptions)
-                    .then(function (response) { return response.text(); })
-                    .then(function (response) { return JSON.parse(response); })
-                    .then(function (result) { return resolve({ status: true, response: result }); })
-                    .catch(function (error) { return reject({ status: false, error: error }); });
-            })];
+                return [4 /*yield*/, nodePonyfill(url, requestOptions)];
+            case 1:
+                res = _a.sent();
+                if (res.status >= 400) {
+                    throw new Error('Bad response from server');
+                }
+                return [4 /*yield*/, res.json()];
+            case 2: return [2 /*return*/, _a.sent()];
+            case 3:
+                err_1 = _a.sent();
+                throw new Error(err_1);
+            case 4: return [2 /*return*/];
+        }
     });
 }); };
 var Get = function (params) { return __awaiter(void 0, void 0, void 0, function () {

@@ -10,13 +10,13 @@ const Request = async (
   queryParams: KeyValue,
   body: any
 ): Promise<any> => {
-  // setting the path variables
-  url = pathVariables ? SetPathVariables(url, pathVariables) : url
+  try {
+    // setting the path variables
+    url = pathVariables ? SetPathVariables(url, pathVariables) : url
 
-  // setting the query params
-  if (queryParams) url = `${url}?${SetQueryParams(queryParams)}`
+    // setting the query params
+    if (queryParams) url = `${url}?${SetQueryParams(queryParams)}`
 
-  return new Promise(function (resolve, reject) {
     var requestOptions = {
       method: method
     }
@@ -27,12 +27,15 @@ const Request = async (
     // //set request body
     if (body) requestOptions['body'] = body
 
-    fetch(url, requestOptions)
-      .then(response => response.text())
-      .then(response => JSON.parse(response))
-      .then(result => resolve({ status: true, response: result }))
-      .catch(error => reject({ status: false, error: error }))
-  })
+    const res = await fetch(url, requestOptions)
+
+    if (res.status >= 400) {
+      throw new Error('Bad response from server')
+    }
+    return await res.json()
+  } catch (err) {
+    throw new Error(err)
+  }
 }
 
 export const Get = async (params: RequestParameter): Promise<any> => {
