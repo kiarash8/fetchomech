@@ -1763,10 +1763,8 @@ headers, pathVariables, queryParams, body) { return __awaiter(void 0, void 0, vo
                     requestOptions['body'] = body;
                 nodePonyfill(url, requestOptions)
                     .then(function (response) { return response.text(); })
-                    .then(function (result) {
-                    var res = JSON.parse(result.toString());
-                    resolve({ status: true, response: res });
-                })
+                    .then(function (response) { return JSON.parse(response); })
+                    .then(function (result) { return resolve({ status: true, response: result }); })
                     .catch(function (error) { return reject({ status: false, error: error }); });
             })];
     });

@@ -29,10 +29,8 @@ const Request = async (
 
     fetch(url, requestOptions)
       .then(response => response.text())
-      .then(result => {
-        const res = JSON.parse(result.toString())
-        resolve({ status: true, response: res })
-      })
+      .then(response => JSON.parse(response))
+      .then(result => resolve({ status: true, response: result }))
       .catch(error => reject({ status: false, error: error }))
   })
 }
