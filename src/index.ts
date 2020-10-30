@@ -1,6 +1,5 @@
 import { Method, KeyValue, RequestParameter } from './types'
 import { SetPathVariables, SetQueryParams } from './utilities'
-import fetch from 'cross-fetch'
 
 const Request = async (
   method: Method,
@@ -10,36 +9,41 @@ const Request = async (
   queryParams: KeyValue,
   body: any
 ) => {
-  try {
-    // setting the path variables
-    url = pathVariables ? SetPathVariables(url, pathVariables) : url
+  // setting the path variables
+  if (pathVariables) url = SetPathVariables(url, pathVariables)
 
-    // setting the query params
-    if (queryParams) url = `${url}?${SetQueryParams(queryParams)}`
+  // setting the query params
+  if (queryParams) url = `${url}?${SetQueryParams(queryParams)}`
 
-    var requestOptions = {
-      method: method
+  return new Promise(function (resolve, reject) {
+    let xhr = new XMLHttpRequest()
+    xhr.open(method, url, true)
+
+    //set request headers
+    Object.keys(headers).forEach(key => {
+      xhr.setRequestHeader(key, headers[key])
+    })
+
+    xhr.onload = function () {
+      const response = JSON.parse(this.responseText)
+      console.log(this)
+      resolve({
+        status: true,
+        code: this.status,
+        response: response
+      })
     }
-
-    // //set request headers
-    if (headers) requestOptions['headers'] = headers
-
-    // //set request body
-    if (body) requestOptions['body'] = body
-
-    const res = await fetch(url, requestOptions)
-
-    if (res.status >= 400) {
-      throw new Error('Bad response from server')
+    xhr.onerror = function () {
+      reject({
+        status: false,
+        code: this.status
+      })
     }
-    const result = await res.json()
-    return result
-  } catch (err) {
-    throw new Error(err)
-  }
+    xhr.send(body)
+  })
 }
 
-export const Get = async (params: RequestParameter): Promise<any> => {
+const Get = async (params: RequestParameter): Promise<any> => {
   return Request(
     Method.Get,
     params.url,
@@ -50,7 +54,7 @@ export const Get = async (params: RequestParameter): Promise<any> => {
   )
 }
 
-export const Post = async (params: RequestParameter): Promise<any> => {
+const Post = async (params: RequestParameter): Promise<any> => {
   return Request(
     Method.Post,
     params.url,
@@ -61,7 +65,7 @@ export const Post = async (params: RequestParameter): Promise<any> => {
   )
 }
 
-export const Put = async (params: RequestParameter): Promise<any> => {
+const Put = async (params: RequestParameter): Promise<any> => {
   return Request(
     Method.Put,
     params.url,
@@ -72,7 +76,7 @@ export const Put = async (params: RequestParameter): Promise<any> => {
   )
 }
 
-export const Patch = async (params: RequestParameter): Promise<any> => {
+const Patch = async (params: RequestParameter): Promise<any> => {
   return Request(
     Method.Patch,
     params.url,
@@ -83,7 +87,7 @@ export const Patch = async (params: RequestParameter): Promise<any> => {
   )
 }
 
-export const Delete = async (params: RequestParameter): Promise<any> => {
+const Delete = async (params: RequestParameter): Promise<any> => {
   return Request(
     Method.Delete,
     params.url,
@@ -93,3 +97,13 @@ export const Delete = async (params: RequestParameter): Promise<any> => {
     params.body ? params.body : null
   )
 }
+
+const Fetchomech = {
+  Get,
+  Post,
+  Put,
+  Patch,
+  Delete
+}
+
+export default Fetchomech
