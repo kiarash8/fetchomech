@@ -1764,7 +1764,7 @@ headers, pathVariables, queryParams, body) { return __awaiter(void 0, void 0, vo
                 nodePonyfill(url, requestOptions)
                     .then(function (response) { return response.text(); })
                     .then(function (result) {
-                    var res = JSON.parse(result);
+                    var res = JSON.parse(result.toString());
                     resolve({ status: true, response: res });
                 })
                     .catch(function (error) { return reject({ status: false, error: error }); });
