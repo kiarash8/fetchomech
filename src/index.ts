@@ -17,6 +17,8 @@ const Request = async (
 
   return new Promise(function (resolve, reject) {
     let xhr = new XMLHttpRequest()
+    xhr.withCredentials = true;
+
     xhr.open(method, url, true)
 
     //set request headers
