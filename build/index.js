@@ -78,6 +78,7 @@ headers, pathVariables, queryParams, body) { return __awaiter(void 0, void 0, vo
             url = url + "?" + SetQueryParams(queryParams);
         return [2 /*return*/, new Promise(function (resolve, reject) {
                 var xhr = new XMLHttpRequest();
+                xhr.withCredentials = true;
                 xhr.open(method, url, true);
                 //set request headers
                 Object.keys(headers).forEach(function (key) {
