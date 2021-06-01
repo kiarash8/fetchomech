@@ -71,7 +71,7 @@ headers, pathVariables, queryParams, body) { return __awaiter(void 0, void 0, vo
             url = SetPathVariables(url, pathVariables);
         // setting the query params
         if (queryParams)
-            url = url + "?" + SetQueryParams(queryParams);
+            url = "" + url + (queryParams && "?" + SetQueryParams(queryParams));
         return [2 /*return*/, new Promise(function (resolve, reject) {
                 var xhr = new XMLHttpRequest();
                 xhr.withCredentials = true;
@@ -82,7 +82,6 @@ headers, pathVariables, queryParams, body) { return __awaiter(void 0, void 0, vo
                 });
                 xhr.onload = function () {
                     var response = JSON.parse(this.responseText);
-                    console.log(this);
                     resolve({
                         status: true,
                         code: this.status,

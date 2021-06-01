@@ -13,11 +13,12 @@ const Request = async (
   if (pathVariables) url = SetPathVariables(url, pathVariables)
 
   // setting the query params
-  if (queryParams) url = `${url}?${SetQueryParams(queryParams)}`
+  if (queryParams)
+    url = `${url}${queryParams && `?${SetQueryParams(queryParams)}`}`
 
   return new Promise(function (resolve, reject) {
     let xhr = new XMLHttpRequest()
-    xhr.withCredentials = true;
+    xhr.withCredentials = true
 
     xhr.open(method, url, true)
 
@@ -28,7 +29,7 @@ const Request = async (
 
     xhr.onload = function () {
       const response = JSON.parse(this.responseText)
-      console.log(this)
+
       resolve({
         status: true,
         code: this.status,
