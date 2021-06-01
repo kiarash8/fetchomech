@@ -1,6 +1,6 @@
 {
   "name": "fetchomech",
-  "version": "1.0.6",
+  "version": "1.0.2",
   "description": "HTTP Request Handler",
   "main": "build/index.js",
   "module": "build/index.es.js",
