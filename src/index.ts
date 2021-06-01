@@ -13,8 +13,8 @@ const Request = async (
   if (pathVariables) url = SetPathVariables(url, pathVariables)
 
   // setting the query params
-  if (queryParams)
-    url = `${url}${queryParams && `?${SetQueryParams(queryParams)}`}`
+  if (Object.keys(queryParams).length > 0)
+    url = `${url}?${SetQueryParams(queryParams)}`
 
   return new Promise(function (resolve, reject) {
     let xhr = new XMLHttpRequest()

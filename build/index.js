@@ -74,8 +74,8 @@ headers, pathVariables, queryParams, body) { return __awaiter(void 0, void 0, vo
         if (pathVariables)
             url = SetPathVariables(url, pathVariables);
         // setting the query params
-        if (queryParams)
-            url = "" + url + (queryParams && "?" + SetQueryParams(queryParams));
+        if (Object.keys(queryParams).length > 0)
+            url = url + "?" + SetQueryParams(queryParams);
         return [2 /*return*/, new Promise(function (resolve, reject) {
                 var xhr = new XMLHttpRequest();
                 xhr.withCredentials = true;
